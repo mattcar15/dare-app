@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "dare-app",
+    "slug": "dare-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "dare-app"
+}
