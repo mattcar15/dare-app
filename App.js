@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Text,
+  View,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import DareScreen from './DareScreen';
+import LoginScreen from './LoginScreen';
+import SignupScreen from './SignupScreen';
+import AuthScreen from './AuthScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const Stack = createNativeStackNavigator();
+
+const config = {
+  animation: 'timing',
+  config: {
+    duration: 0,
   },
-});
+};
+
+const App = () => (
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Auth" screenOptions={{
+        headerShown: false,
+        animationEnabled: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
+      }}>
+      <Stack.Screen name="Auth" component={AuthScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Dare" component={DareScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
+
+export default App;
