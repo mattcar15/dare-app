@@ -19,6 +19,8 @@ import SInfo from "react-native-sensitive-info";
 import { useIsFocused } from "@react-navigation/native";
 import DropShadow from "react-native-drop-shadow";
 
+import { URL } from './setup';
+
 
 const orientation0 = {
   start: { x: 0, y: 0 },
@@ -57,10 +59,9 @@ export default function DareScreen({ navigation }) {
     if (!savingJWT) {
       navigation.navigate('Login');
     } else {
-
       setUserToken(savingJWT);
 
-      fetch('http://127.0.0.1:5000/user', {
+      fetch(URL + '/user', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -102,7 +103,7 @@ export default function DareScreen({ navigation }) {
 
   function skipDare() {
     setOrientation(orientation == 1 ? 0 : 1)
-    fetch(`http://127.0.0.1:5000/skip-dare/${dareID}`, {
+    fetch(URL + `/skip-dare/${dareID}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -124,7 +125,7 @@ export default function DareScreen({ navigation }) {
   }
 
   function completeDare() {
-    fetch(`http://127.0.0.1:5000/complete-dare/${dareID}`, {
+    fetch(URL + `/complete-dare/${dareID}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -144,7 +145,7 @@ export default function DareScreen({ navigation }) {
   }
 
   function failDare() {
-    fetch(`http://127.0.0.1:5000/fail-dare/${dareID}`, {
+    fetch(URL + `/fail-dare/${dareID}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -168,7 +169,7 @@ export default function DareScreen({ navigation }) {
   }
 
   function getNewDare() {
-    fetch('http://127.0.0.1:5000/dare', {
+    fetch(URL + '/dare', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -195,6 +196,25 @@ export default function DareScreen({ navigation }) {
     })
   }
 
+  function askLogout() {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        {
+          text: "Logout",
+          onPress: () => logout(),
+          style: "Ok"
+        }
+      ]
+    );
+  }
+
   async function logout() {
     const deleteJWT = await SInfo.deleteItem("jwt", {
       sharedPreferencesName: "dareAppPrefs",
@@ -216,7 +236,7 @@ export default function DareScreen({ navigation }) {
           style={styles.gradientCard}
         >
           <View style={styles.topWrapper}>
-            <Pressable style={({ pressed }) => [styles.createButton, pressed ? styles.pressed : null]} onPress={null}>
+            <Pressable style={({ pressed }) => [styles.createButton, pressed ? styles.pressed : null]} onPress={() => navigation.navigate('Create')}>
               <Image
               style={styles.createImage}
               source={require('./create.png')}
@@ -226,10 +246,10 @@ export default function DareScreen({ navigation }) {
             style={styles.logo}
             source={require('./logo.png')}
             />
-            <Pressable style={({ pressed }) => [styles.menuButton, pressed ? styles.pressed : null]} onPress={logout}>
+            <Pressable style={({ pressed }) => [styles.menuButton, pressed ? styles.pressed : null]} onPress={askLogout}>
               <Image
               style={styles.menuImage}
-              source={require('./menu.png')}
+              source={require('./logout.png')}
               />
             </Pressable>
           </View>

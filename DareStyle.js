@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
     },
 
     menuImage: {
-      height: 40,
-      width: 40,
-      marginRight: 10,
+      height: 20,
+      width: 20,
+      marginRight: 20,
       resizeMode: 'contain',
     },
 
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 14,
       color: '#707070',
-      marginBottom: 15,
+      marginVertical: 15,
     }
 });
 

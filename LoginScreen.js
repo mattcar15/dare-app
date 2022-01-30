@@ -13,7 +13,7 @@ import SInfo from "react-native-sensitive-info";
 
 import { styles } from './LoginStyle';
 import LinearGradient from 'react-native-linear-gradient';
-
+import { URL } from './setup';
 
 export default function LoginScreen({ navigation }) {
 
@@ -26,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       setError("Invalid email.");
     } else {
       setError("");
-      fetch('http://127.0.0.1:5000/sign-in', {
+      fetch(URL + '/sign-in', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -67,6 +67,14 @@ export default function LoginScreen({ navigation }) {
         }
       })
     }
+  }
+
+  async function logout() {
+    const deleteJWT = await SInfo.deleteItem("jwt", {
+      sharedPreferencesName: "dareAppPrefs",
+      keychainService: "dareAppKeychain",
+    });
+    navigation.navigate('Login');
   }
 
   const validateEmail = (email) => {

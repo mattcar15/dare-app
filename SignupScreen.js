@@ -15,6 +15,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import SInfo from "react-native-sensitive-info";
 
+import { URL } from './setup';
+
 export default function SignupScreen({ navigation }) {
 
   const [email, onChangeEmail] = useState("")
@@ -37,7 +39,7 @@ export default function SignupScreen({ navigation }) {
       setError("Passwords do not match.");
     } else {
       setError("");
-      fetch('http://127.0.0.1:5000/sign-up', {
+      fetch(URL + '/sign-up', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

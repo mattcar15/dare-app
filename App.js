@@ -1,41 +1,31 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import DareScreen from './DareScreen';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
 import AuthScreen from './AuthScreen';
+import CreateScreen from './CreateScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-const config = {
-  animation: 'timing',
-  config: {
-    duration: 0,
-  },
-};
-
-const App = () => (
+function App() {
+  return (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Auth" screenOptions={{
+    <Stack.Navigator  screenOptions={{
         headerShown: false,
         animationEnabled: false,
-        transitionSpec: {
-          open: config,
-          close: config,
-        },
-      }}>
+      }}
+      >
       <Stack.Screen name="Auth" component={AuthScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Dare" component={DareScreen} />
+      <Stack.Screen name="Create" component={CreateScreen} />
     </Stack.Navigator>
   </NavigationContainer>
-);
+  );
+};
 
 export default App;
