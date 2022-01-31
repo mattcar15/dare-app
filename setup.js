@@ -2,4 +2,4 @@
 
 // FOR DEV
 
-export const URL = "http://ec2-184-72-131-17.compute-1.amazonaws.com:8000";
+export const URL = "https://mattwcarroll.com";

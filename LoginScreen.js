@@ -61,10 +61,11 @@ export default function LoginScreen({ navigation }) {
             }
           })
           .catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-            throw error;
+            setError('There has been a problem with login: ' + error.message);
           });
         }
+      }).catch(function(error) {
+        setError('There was a problem connecting: ' + error.message);
       })
     }
   }
